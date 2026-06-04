@@ -6,11 +6,7 @@ build/
 !**/src/test/**/build/
 
 .env
-build.gradle
-gradlew
-gradle.bat
 HELP.md
-settings.gradle
 
 
 ### STS ###
