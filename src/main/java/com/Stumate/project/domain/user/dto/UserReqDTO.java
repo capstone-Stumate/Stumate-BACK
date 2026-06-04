@@ -1,5 +1,6 @@
 package com.Stumate.project.domain.user.dto;
 
+import com.Stumate.project.domain.user.enums.PlanLevel;
 import lombok.Getter;
 
 public class UserReqDTO {
@@ -9,7 +10,7 @@ public class UserReqDTO {
         private String username;
         private String password;
         private String name;
-        private Integer planLevel;
+        private PlanLevel planLevel;
     }
 
     @Getter

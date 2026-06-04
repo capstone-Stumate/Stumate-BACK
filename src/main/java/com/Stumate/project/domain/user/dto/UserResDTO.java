@@ -1,5 +1,6 @@
 package com.Stumate.project.domain.user.dto;
 
+import com.Stumate.project.domain.user.enums.PlanLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,7 +14,7 @@ public class UserResDTO {
         private Long userId;
         private String username;
         private String name;
-        private Integer planLevel;
+        private PlanLevel planLevel;
     }
 
     @Getter

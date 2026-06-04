@@ -1,5 +1,6 @@
 package com.Stumate.project.domain.user.entity;
 
+import com.Stumate.project.domain.user.enums.PlanLevel;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -27,8 +28,9 @@ public class User {
     @Column(name = "name", nullable = false, length = 50)
     private String name;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "plan_level", nullable = false)
-    private Integer planLevel;
+    private PlanLevel planLevel;
 
     @Column(name = "msg_id")
     private Long msgId;
@@ -46,7 +48,7 @@ public class User {
     protected void onCreate() {
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
-        if (this.planLevel == null) this.planLevel = 1;
+        if (this.planLevel == null) this.planLevel = PlanLevel.EASY;
     }
 
     @PreUpdate
@@ -62,7 +64,7 @@ public class User {
         return this.deletedAt != null;
     }
 
-    public void updatePlanLevel(Integer planLevel) {
+    public void updatePlanLevel(PlanLevel planLevel) {
         this.planLevel = planLevel;
     }
 }
