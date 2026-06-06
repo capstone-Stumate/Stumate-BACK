@@ -1,4 +1,4 @@
 package com.Stumate.project.global.exception;
 
-public class GlobalException {
+public class GlobalExceptionHandler {
 }
