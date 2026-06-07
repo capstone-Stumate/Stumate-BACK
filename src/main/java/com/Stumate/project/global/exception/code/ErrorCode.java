@@ -24,7 +24,11 @@ public enum ErrorCode {
     SESSION_ALREADY_STARTED(HttpStatus.BAD_REQUEST, "이미 시작된 세션이 있습니다."),
 
     // Todo
-    TODO_NOT_FOUND(HttpStatus.NOT_FOUND, "할 일을 찾을 수 없습니다.");
+    TODO_NOT_FOUND(HttpStatus.NOT_FOUND, "할 일을 찾을 수 없습니다."),
+
+    // UserSubject (추가!)
+    SUBJECT_NOT_FOUND(HttpStatus.NOT_FOUND, "과목을 찾을 수 없습니다."),
+    DUPLICATE_SUBJECT(HttpStatus.CONFLICT, "이미 등록된 과목입니다.");
 
     private final HttpStatus status;
     private final String message;

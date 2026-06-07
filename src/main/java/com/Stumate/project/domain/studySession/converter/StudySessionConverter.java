@@ -9,7 +9,7 @@ public class StudySessionConverter {
     public static StudySession toEntity(Long userId, StudySessionReqDTO.Start request) {
         return StudySession.builder()
                 .userId(userId)
-                .subject(request.getSubject())
+                .userSubjectId(request.getUserSubjectId()) // subject → userSubjectId로 수정!
                 .location(request.getLocation())
                 .build();
     }
@@ -17,7 +17,7 @@ public class StudySessionConverter {
     public static StudySessionResDTO.Info toInfo(StudySession session) {
         return StudySessionResDTO.Info.builder()
                 .sessionId(session.getSessionId())
-                .subject(session.getSubject())
+                .userSubjectId(session.getUserSubjectId()) // subject → userSubjectId
                 .location(session.getLocation())
                 .startedAt(session.getStartedAt())
                 .endedAt(session.getEndedAt())

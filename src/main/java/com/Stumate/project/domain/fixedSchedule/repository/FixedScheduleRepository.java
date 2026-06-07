@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface FixedScheduleRepository extends JpaRepository<FixedSchedule, Long> {
-    List<FixedSchedule> findAllByUserId(Long userId);
-    List<FixedSchedule> findAllByUserIdAndDayOfWeek(Long userId, DayOfWeekType dayOfWeek);
+
+    // 삭제된 것 제외하고 조회 (수정!)
+    List<FixedSchedule> findAllByUserIdAndDeletedAtIsNull(Long userId);
+    List<FixedSchedule> findAllByUserIdAndDayOfWeekAndDeletedAtIsNull(Long userId, DayOfWeekType dayOfWeek);
 }

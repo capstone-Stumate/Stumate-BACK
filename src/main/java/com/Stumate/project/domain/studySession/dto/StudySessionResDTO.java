@@ -14,7 +14,7 @@ public class StudySessionResDTO {
     @AllArgsConstructor
     public static class Info {
         private Long sessionId;
-        private String subject;
+        private Long userSubjectId;
         private LocationType location;
         private LocalDateTime startedAt;
         private LocalDateTime endedAt;

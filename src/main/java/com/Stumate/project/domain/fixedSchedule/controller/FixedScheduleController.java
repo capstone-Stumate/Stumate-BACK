@@ -31,4 +31,12 @@ public class FixedScheduleController {
         return ResponseEntity.ok(fixedScheduleService.createSchedule(userId, request));
     }
 
+    // 고정 일정 삭제 (추가!)
+    @DeleteMapping("/{scheduleId}")
+    public ResponseEntity<Void> deleteSchedule(
+            @PathVariable Long userId,
+            @PathVariable Long scheduleId) {
+        fixedScheduleService.deleteSchedule(userId, scheduleId);
+        return ResponseEntity.noContent().build();
+    }
 }

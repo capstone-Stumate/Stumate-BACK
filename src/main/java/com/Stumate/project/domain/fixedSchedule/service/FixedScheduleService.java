@@ -21,9 +21,9 @@ public class FixedScheduleService {
 
     private final FixedScheduleRepository fixedScheduleRepository;
 
-    // 사용자 고정 일정 전체 조회
+    // 사용자 고정 일정 전체 조회 (삭제된 것 제외)
     public List<FixedScheduleResDTO.Info> getSchedules(Long userId) {
-        return fixedScheduleRepository.findAllByUserId(userId).stream()
+        return fixedScheduleRepository.findAllByUserIdAndDeletedAtIsNull(userId).stream()
                 .map(FixedScheduleConverter::toInfo)
                 .collect(Collectors.toList());
     }
@@ -35,11 +35,11 @@ public class FixedScheduleService {
         return FixedScheduleConverter.toInfo(fixedScheduleRepository.save(schedule));
     }
 
-    // 고정 일정 삭제
+    // 고정 일정 삭제 (soft delete로 수정!)
     @Transactional
     public void deleteSchedule(Long userId, Long scheduleId) {
         FixedSchedule schedule = fixedScheduleRepository.findById(scheduleId)
                 .orElseThrow(() -> new GlobalException(ErrorCode.SCHEDULE_NOT_FOUND));
-        fixedScheduleRepository.delete(schedule);
+        schedule.delete(); // hard delete → soft delete로 수정
     }
 }

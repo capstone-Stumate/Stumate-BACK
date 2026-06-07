@@ -25,7 +25,7 @@ public class TodoController {
         return ResponseEntity.ok(todoService.getTodayTodos(userId));
     }
 
-    // 주간 할 일 조회 (내 정보 화면)
+    // 주간 할 일 조회
     @GetMapping("/weekly")
     public ResponseEntity<List<TodoResDTO.DailyGroup>> getWeeklyTodos(
             @PathVariable Long userId,
@@ -50,4 +50,12 @@ public class TodoController {
         return ResponseEntity.ok(todoService.completeTodo(userId, todoId));
     }
 
+    // 할 일 삭제 (추가!)
+    @DeleteMapping("/{todoId}")
+    public ResponseEntity<Void> deleteTodo(
+            @PathVariable Long userId,
+            @PathVariable Long todoId) {
+        todoService.deleteTodo(userId, todoId);
+        return ResponseEntity.noContent().build();
+    }
 }

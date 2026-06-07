@@ -7,7 +7,7 @@ import lombok.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "TimerRecord_Sessions")
+@Table(name = "timer_record_sessions")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
@@ -22,8 +22,8 @@ public class StudySession {
     @Column(name = "user_id", nullable = false)
     private Long userId;
 
-    @Column(name = "subject", nullable = false, length = 50)
-    private String subject;
+    @Column(name = "user_subject_id", nullable = false)
+    private Long userSubjectId;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "location", nullable = false)

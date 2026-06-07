@@ -4,12 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
-public class UserSubjectDTO {
-
-    @Getter
-    public static class Create {
-        private String subjectName;
-    }
+public class UserSubjectResDTO {
 
     @Getter
     @Builder
