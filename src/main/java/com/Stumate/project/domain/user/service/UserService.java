@@ -1,6 +1,8 @@
 package com.Stumate.project.domain.user.service;
 
+import com.Stumate.project.domain.user.converter.UserConverter;
 import com.Stumate.project.domain.user.dto.UserReqDTO;
+import com.Stumate.project.domain.user.dto.UserResDTO;
 import com.Stumate.project.domain.user.entity.User;
 import com.Stumate.project.domain.user.repository.UserRepository;
 import com.Stumate.project.global.exception.GlobalException;
@@ -17,6 +19,17 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
+
+    public UserResDTO.Info login(UserReqDTO.Login request) {
+        User user = userRepository.findByUsername(request.getUsername())
+                .orElseThrow(() -> new GlobalException(ErrorCode.USER_NOT_FOUND));
+
+        if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
+            throw new GlobalException(ErrorCode.INVALID_INPUT);
+        }
+
+        return UserConverter.toInfo(user);
+    }
     @Transactional
     public User signup(UserReqDTO.SignUp request) {
         if (userRepository.existsByUsername(request.getUsername())) {
@@ -29,5 +42,8 @@ public class UserService {
                 .planLevel(request.getPlanLevel())
                 .build();
         return userRepository.save(user);
+
+
+
     }
 }

@@ -7,7 +7,7 @@ build/
 
 .env
 HELP.md
-
+application-local.yaml
 
 ### STS ###
 application.yaml

@@ -26,7 +26,7 @@ public class UserController {
 
     @PostMapping("/auth/login")
     public ResponseEntity<?> login(@RequestBody UserReqDTO.Login request) {
-        return ResponseEntity.ok("로그인 성공");
+        return ResponseEntity.ok(userService.login(request));
     }
 
     @PostMapping("/auth/logout")
