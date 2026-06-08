@@ -39,11 +39,14 @@ public class UserService {
                 .username(request.getUsername())
                 .name(request.getName())
                 .password(passwordEncoder.encode(request.getPassword()))
-                .planLevel(request.getPlanLevel())
                 .build();
         return userRepository.save(user);
-
-
-
+    }
+    @Transactional
+    public UserResDTO.Info updatePlanInfo(Long userId, UserReqDTO.UpdatePlanInfo request) {
+        User user = userRepository.findByUserIdAndDeletedAtIsNull(userId)
+                .orElseThrow(() -> new GlobalException(ErrorCode.USER_NOT_FOUND));
+        user.updatePlanLevel(request.getPlanLevel());
+        return UserConverter.toInfo(user);
     }
 }

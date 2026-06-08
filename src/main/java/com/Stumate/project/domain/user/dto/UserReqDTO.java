@@ -20,8 +20,10 @@ public class UserReqDTO {
 
         @NotBlank(message = "이름을 입력해주세요.")
         private String name;
+    }
 
-        @NotNull(message = "플랜 난이도를 선택해주세요.")
+    @Getter
+    public static class UpdatePlanInfo {
         private PlanLevel planLevel;
     }
 

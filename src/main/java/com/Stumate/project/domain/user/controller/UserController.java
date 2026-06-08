@@ -6,10 +6,7 @@ import com.Stumate.project.domain.user.entity.User;
 import com.Stumate.project.domain.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -29,8 +26,17 @@ public class UserController {
         return ResponseEntity.ok(userService.login(request));
     }
 
+
     @PostMapping("/auth/logout")
     public ResponseEntity<?> logout() {
         return ResponseEntity.ok("로그아웃 성공");
+    }
+
+
+    @PatchMapping("/{userId}/plan")
+    public ResponseEntity<?> updatePlanInfo(
+            @PathVariable Long userId,
+            @RequestBody UserReqDTO.UpdatePlanInfo request) {
+        return ResponseEntity.ok(userService.updatePlanInfo(userId, request));
     }
 }
