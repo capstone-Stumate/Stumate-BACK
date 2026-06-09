@@ -6,15 +6,15 @@ import com.Stumate.project.domain.userSubject.entity.UserSubject;
 
 public class UserSubjectConverter {
 
-    public static UserSubject toEntity(Long userId, UserSubjectReqDTO.Create request) {
+    public static UserSubject toEntity(Long userId, UserSubjectReqDTO.UserSubjectCreate request) {
         return UserSubject.builder()
                 .userId(userId)
                 .subjectName(request.getSubjectName())
                 .build();
     }
 
-    public static UserSubjectResDTO.Info toInfo(UserSubject userSubject) {
-        return UserSubjectResDTO.Info.builder()
+    public static UserSubjectResDTO.SubjectInfo toInfo(UserSubject userSubject) {
+        return UserSubjectResDTO.SubjectInfo.builder()
                 .userSubjectId(userSubject.getUserSubjectId())
                 .subjectName(userSubject.getSubjectName())
                 .build();

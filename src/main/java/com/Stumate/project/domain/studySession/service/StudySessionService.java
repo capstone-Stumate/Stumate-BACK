@@ -22,25 +22,22 @@ public class StudySessionService {
     private final StudySessionRepository studySessionRepository;
 
     @Transactional
-    public StudySessionResDTO.Info startSession(Long userId, StudySessionReqDTO.Start request) {
+    public StudySessionResDTO.SessionInfo startSession(Long userId, StudySessionReqDTO.Start request) {
         studySessionRepository.findByUserIdAndEndedAtIsNull(userId).ifPresent(s -> {
             throw new GlobalException(ErrorCode.SESSION_ALREADY_STARTED);
         });
-
         StudySession session = StudySessionConverter.toEntity(userId, request);
         return StudySessionConverter.toInfo(studySessionRepository.save(session));
     }
 
     @Transactional
-    public StudySessionResDTO.Info finishSession(Long userId, Long sessionId,
-                                                 StudySessionReqDTO.Finish request) {
+    public StudySessionResDTO.SessionInfo finishSession(Long userId, Long sessionId,
+                                                        StudySessionReqDTO.Finish request) {
         StudySession session = studySessionRepository.findBySessionIdAndUserId(sessionId, userId)
                 .orElseThrow(() -> new GlobalException(ErrorCode.SESSION_NOT_FOUND));
-
         LocalDateTime now = LocalDateTime.now();
         int durationSec = (int) ChronoUnit.SECONDS.between(session.getStartedAt(), now);
         session.finish(now, durationSec, request.getFocusScore(), request.getPauseCount());
-
         return StudySessionConverter.toInfo(session);
     }
 

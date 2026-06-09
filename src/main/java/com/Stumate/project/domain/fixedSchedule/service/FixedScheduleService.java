@@ -21,25 +21,33 @@ public class FixedScheduleService {
 
     private final FixedScheduleRepository fixedScheduleRepository;
 
-    // 사용자 고정 일정 전체 조회 (삭제된 것 제외)
-    public List<FixedScheduleResDTO.Info> getSchedules(Long userId) {
+    public List<FixedScheduleResDTO.ScheduleInfo> getSchedules(Long userId) {
         return fixedScheduleRepository.findAllByUserIdAndDeletedAtIsNull(userId).stream()
                 .map(FixedScheduleConverter::toInfo)
                 .collect(Collectors.toList());
     }
 
-    // 고정 일정 추가
+    // 여러 요일을 각각 저장
     @Transactional
-    public FixedScheduleResDTO.Info createSchedule(Long userId, FixedScheduleReqDTO.Create request) {
-        FixedSchedule schedule = FixedScheduleConverter.toEntity(userId, request);
-        return FixedScheduleConverter.toInfo(fixedScheduleRepository.save(schedule));
+    public List<FixedScheduleResDTO.ScheduleInfo> createSchedule(Long userId, FixedScheduleReqDTO.ScheduleCreate request) {
+        return request.getDays().stream()
+                .map(day -> {
+                    FixedSchedule schedule = FixedSchedule.builder()
+                            .userId(userId)
+                            .scheduleName(request.getScheduleName())
+                            .dayOfWeek(day)
+                            .startTime(request.getStartTime())
+                            .endTime(request.getEndTime())
+                            .build();
+                    return FixedScheduleConverter.toInfo(fixedScheduleRepository.save(schedule));
+                })
+                .collect(Collectors.toList());
     }
 
-    // 고정 일정 삭제 (soft delete로 수정!)
     @Transactional
     public void deleteSchedule(Long userId, Long scheduleId) {
         FixedSchedule schedule = fixedScheduleRepository.findById(scheduleId)
                 .orElseThrow(() -> new GlobalException(ErrorCode.SCHEDULE_NOT_FOUND));
-        schedule.delete(); // hard delete → soft delete로 수정
+        schedule.delete();
     }
 }

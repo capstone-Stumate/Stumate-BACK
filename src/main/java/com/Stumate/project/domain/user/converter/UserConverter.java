@@ -5,8 +5,8 @@ import com.Stumate.project.domain.user.entity.User;
 
 public class UserConverter {
 
-    public static UserResDTO.Info toInfo(User user) {
-        return UserResDTO.Info.builder()
+    public static UserResDTO.UserInfo toInfo(User user) {
+        return UserResDTO.UserInfo.builder()
                 .userId(user.getUserId())
                 .username(user.getUsername())
                 .name(user.getName())
@@ -21,8 +21,7 @@ public class UserConverter {
                 .build();
     }
 
-    // 추가!
-    public static UserResDTO.Info toSignupResult(User user) {
+    public static UserResDTO.UserInfo toSignupResult(User user) {
         return toInfo(user);
     }
 }

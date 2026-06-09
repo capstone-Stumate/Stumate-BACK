@@ -17,21 +17,18 @@ public class FixedScheduleController {
 
     private final FixedScheduleService fixedScheduleService;
 
-    // 고정 일정 목록 조회
     @GetMapping
-    public ResponseEntity<List<FixedScheduleResDTO.Info>> getSchedules(@PathVariable Long userId) {
+    public ResponseEntity<List<FixedScheduleResDTO.ScheduleInfo>> getSchedules(@PathVariable Long userId) {
         return ResponseEntity.ok(fixedScheduleService.getSchedules(userId));
     }
 
-    // 고정 일정 추가
     @PostMapping
-    public ResponseEntity<FixedScheduleResDTO.Info> createSchedule(
+    public ResponseEntity<List<FixedScheduleResDTO.ScheduleInfo>> createSchedule(
             @PathVariable Long userId,
-            @Valid @RequestBody FixedScheduleReqDTO.Create request) {
+            @Valid @RequestBody FixedScheduleReqDTO.ScheduleCreate request) {
         return ResponseEntity.ok(fixedScheduleService.createSchedule(userId, request));
     }
 
-    // 고정 일정 삭제 (추가!)
     @DeleteMapping("/{scheduleId}")
     public ResponseEntity<Void> deleteSchedule(
             @PathVariable Long userId,

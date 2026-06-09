@@ -9,15 +9,15 @@ public class StudySessionConverter {
     public static StudySession toEntity(Long userId, StudySessionReqDTO.Start request) {
         return StudySession.builder()
                 .userId(userId)
-                .userSubjectId(request.getUserSubjectId()) // subject → userSubjectId로 수정!
+                .userSubjectId(request.getUserSubjectId())
                 .location(request.getLocation())
                 .build();
     }
 
-    public static StudySessionResDTO.Info toInfo(StudySession session) {
-        return StudySessionResDTO.Info.builder()
+    public static StudySessionResDTO.SessionInfo toInfo(StudySession session) {
+        return StudySessionResDTO.SessionInfo.builder()
                 .sessionId(session.getSessionId())
-                .userSubjectId(session.getUserSubjectId()) // subject → userSubjectId
+                .userSubjectId(session.getUserSubjectId())
                 .location(session.getLocation())
                 .startedAt(session.getStartedAt())
                 .endedAt(session.getEndedAt())

@@ -9,7 +9,7 @@ public class UserSubjectResDTO {
     @Getter
     @Builder
     @AllArgsConstructor
-    public static class Info {
+    public static class SubjectInfo {
         private Long userSubjectId;
         private String subjectName;
     }

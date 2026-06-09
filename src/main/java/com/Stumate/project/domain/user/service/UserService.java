@@ -19,17 +19,15 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-
-    public UserResDTO.Info login(UserReqDTO.Login request) {
+    public UserResDTO.UserInfo login(UserReqDTO.Login request) {
         User user = userRepository.findByUsername(request.getUsername())
                 .orElseThrow(() -> new GlobalException(ErrorCode.USER_NOT_FOUND));
-
         if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
             throw new GlobalException(ErrorCode.INVALID_INPUT);
         }
-
         return UserConverter.toInfo(user);
     }
+
     @Transactional
     public User signup(UserReqDTO.SignUp request) {
         if (userRepository.existsByUsername(request.getUsername())) {
@@ -42,8 +40,9 @@ public class UserService {
                 .build();
         return userRepository.save(user);
     }
+
     @Transactional
-    public UserResDTO.Info updatePlanInfo(Long userId, UserReqDTO.UpdatePlanInfo request) {
+    public UserResDTO.UserInfo updatePlanInfo(Long userId, UserReqDTO.UpdatePlanInfo request) {
         User user = userRepository.findByUserIdAndDeletedAtIsNull(userId)
                 .orElseThrow(() -> new GlobalException(ErrorCode.USER_NOT_FOUND));
         user.updatePlanLevel(request.getPlanLevel());

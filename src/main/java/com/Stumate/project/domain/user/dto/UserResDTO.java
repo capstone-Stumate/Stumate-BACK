@@ -10,7 +10,7 @@ public class UserResDTO {
     @Getter
     @Builder
     @AllArgsConstructor
-    public static class Info {
+    public static class UserInfo {
         private Long userId;
         private String username;
         private String name;

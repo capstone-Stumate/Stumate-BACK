@@ -6,7 +6,7 @@ import lombok.Getter;
 public class UserSubjectReqDTO {
 
     @Getter
-    public static class Create {
+    public static class UserSubjectCreate {
 
         @NotBlank(message = "과목명을 입력해주세요.")
         private String subjectName;

@@ -12,7 +12,7 @@ public class StudySessionResDTO {
     @Getter
     @Builder
     @AllArgsConstructor
-    public static class Info {
+    public static class SessionInfo {
         private Long sessionId;
         private Long userSubjectId;
         private LocationType location;

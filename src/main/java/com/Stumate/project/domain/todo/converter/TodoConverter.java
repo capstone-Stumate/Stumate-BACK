@@ -11,8 +11,8 @@ import java.util.stream.Collectors;
 
 public class TodoConverter {
 
-    public static TodoResDTO.Info toInfo(Todo todo) {
-        return TodoResDTO.Info.builder()
+    public static TodoResDTO.TodoInfo toInfo(Todo todo) {
+        return TodoResDTO.TodoInfo.builder()
                 .todoId(todo.getTodoId())
                 .content(todo.getContent())
                 .todoDate(todo.getTodoDate())

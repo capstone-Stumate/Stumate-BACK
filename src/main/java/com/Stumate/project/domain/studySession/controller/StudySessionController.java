@@ -18,24 +18,21 @@ public class StudySessionController {
 
     private final StudySessionService studySessionService;
 
-    // 타이머 시작
     @PostMapping("/start")
-    public ResponseEntity<StudySessionResDTO.Info> startSession(
+    public ResponseEntity<StudySessionResDTO.SessionInfo> startSession(
             @PathVariable Long userId,
             @Valid @RequestBody StudySessionReqDTO.Start request) {
         return ResponseEntity.ok(studySessionService.startSession(userId, request));
     }
 
-    // 타이머 종료
     @PatchMapping("/{sessionId}/finish")
-    public ResponseEntity<StudySessionResDTO.Info> finishSession(
+    public ResponseEntity<StudySessionResDTO.SessionInfo> finishSession(
             @PathVariable Long userId,
             @PathVariable Long sessionId,
             @Valid @RequestBody StudySessionReqDTO.Finish request) {
         return ResponseEntity.ok(studySessionService.finishSession(userId, sessionId, request));
     }
 
-    // 주간 공부 시간 조회 (추가!)
     @GetMapping("/weekly-stats")
     public ResponseEntity<StudySessionResDTO.WeeklyStats> getWeeklyStats(
             @PathVariable Long userId,

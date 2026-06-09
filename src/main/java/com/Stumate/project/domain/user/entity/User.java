@@ -32,9 +32,6 @@ public class User {
     @Column(name = "plan_level", nullable = false)
     private PlanLevel planLevel;
 
-    @Column(name = "msg_id")
-    private Long msgId;
-
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
 

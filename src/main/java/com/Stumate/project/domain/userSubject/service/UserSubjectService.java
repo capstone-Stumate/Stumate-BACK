@@ -21,14 +21,14 @@ public class UserSubjectService {
 
     private final UserSubjectRepository userSubjectRepository;
 
-    public List<UserSubjectResDTO.Info> getSubjects(Long userId) {
+    public List<UserSubjectResDTO.SubjectInfo> getSubjects(Long userId) {
         return userSubjectRepository.findByUserIdAndDeletedAtIsNull(userId).stream()
                 .map(UserSubjectConverter::toInfo)
                 .collect(Collectors.toList());
     }
 
     @Transactional
-    public UserSubjectResDTO.Info addSubject(Long userId, UserSubjectReqDTO.Create request) {
+    public UserSubjectResDTO.SubjectInfo addSubject(Long userId, UserSubjectReqDTO.UserSubjectCreate request) {
         if (userSubjectRepository.existsByUserIdAndSubjectNameAndDeletedAtIsNull(userId, request.getSubjectName())) {
             throw new GlobalException(ErrorCode.DUPLICATE_SUBJECT);
         }

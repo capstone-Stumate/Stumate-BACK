@@ -13,7 +13,7 @@ public class TodoResDTO {
     @Getter
     @Builder
     @AllArgsConstructor
-    public static class Info {
+    public static class TodoInfo {
         private Long todoId;
         private String content;
         private LocalDate todoDate;
@@ -27,6 +27,6 @@ public class TodoResDTO {
     @AllArgsConstructor
     public static class DailyGroup {
         private LocalDate todoDate;
-        private List<Info> todos;
+        private List<TodoInfo> todos;
     }
 }

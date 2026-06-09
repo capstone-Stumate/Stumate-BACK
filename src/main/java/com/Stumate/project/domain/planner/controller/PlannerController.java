@@ -13,9 +13,8 @@ public class PlannerController {
 
     private final PlannerService plannerService;
 
-    // 플래너 조회 (통계 + AI 분석 + 플래너 생성)
     @GetMapping
-    public ResponseEntity<PlannerResDTO.Info> getPlanner(@PathVariable Long userId) {
+    public ResponseEntity<PlannerResDTO.PlannerInfo> getPlanner(@PathVariable Long userId) {
         return ResponseEntity.ok(plannerService.getPlanner(userId));
     }
 }

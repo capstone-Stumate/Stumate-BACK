@@ -19,13 +19,11 @@ public class TodoController {
 
     private final TodoService todoService;
 
-    // 오늘 할 일 조회
     @GetMapping("/today")
-    public ResponseEntity<List<TodoResDTO.Info>> getTodayTodos(@PathVariable Long userId) {
+    public ResponseEntity<List<TodoResDTO.TodoInfo>> getTodayTodos(@PathVariable Long userId) {
         return ResponseEntity.ok(todoService.getTodayTodos(userId));
     }
 
-    // 주간 할 일 조회
     @GetMapping("/weekly")
     public ResponseEntity<List<TodoResDTO.DailyGroup>> getWeeklyTodos(
             @PathVariable Long userId,
@@ -34,23 +32,20 @@ public class TodoController {
         return ResponseEntity.ok(todoService.getWeeklyTodos(userId, startDate, endDate));
     }
 
-    // 할 일 추가
     @PostMapping
-    public ResponseEntity<TodoResDTO.Info> createTodo(
+    public ResponseEntity<TodoResDTO.TodoInfo> createTodo(
             @PathVariable Long userId,
             @Valid @RequestBody TodoReqDTO.Create request) {
         return ResponseEntity.ok(todoService.createTodo(userId, request));
     }
 
-    // 할 일 완료 처리
     @PatchMapping("/{todoId}/complete")
-    public ResponseEntity<TodoResDTO.Info> completeTodo(
+    public ResponseEntity<TodoResDTO.TodoInfo> completeTodo(
             @PathVariable Long userId,
             @PathVariable Long todoId) {
         return ResponseEntity.ok(todoService.completeTodo(userId, todoId));
     }
 
-    // 할 일 삭제 (추가!)
     @DeleteMapping("/{todoId}")
     public ResponseEntity<Void> deleteTodo(
             @PathVariable Long userId,
