@@ -140,8 +140,6 @@ https://stumate-gmf9edeabxc3ahhf.koreacentral-01.azurewebsites.net/swagger-ui/in
 
 ## ⚙️ 환경 변수
 
-Azure App Service 환경 변수에 아래 값을 설정해주세요:
-
 | 변수명 | 설명 |
 |---|---|
 | `DB_URL` | MySQL 연결 URL |
@@ -152,15 +150,3 @@ Azure App Service 환경 변수에 아래 값을 설정해주세요:
 | `AZURE_OPENAI_DEPLOYMENT` | 배포 모델명 (gpt-4o) |
 
 ---
-
-## 👩‍💻 개발자
-
-| 이름 | 역할 | 학교 |
-|---|---|---|
-| 양세영 | Backend 개발 | 숙명여자대학교 |
-
----
-
-## 📄 라이선스
-
-숙명여자대학교 졸업 프로젝트 (인공지능산업체특강)
